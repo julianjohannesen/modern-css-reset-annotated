@@ -8,7 +8,7 @@ This project is a fork of Andy Bell's Modern CSS Reset. Modern CSS Reset is a ti
 
 2. To provide a quick reference that more experienced users can refer to to refresh themselves as to why a certain property has a certain value
 
-3. To provide citations that are both authoratative and **recent**
+3. To provide dated citations that are both authoratative and **recent**. I often wonder whether a best practice is still a best practice. Knowing the source of the practice and the date it was created is very helpful in that regard.
 
 ## Installation
 
