@@ -1,0 +1,26 @@
+{
+  "name": "modern-css-reset-annotated",
+  "version": "0.0.1",
+  "description": "A fork of Andy Bell's Modern CSS Reset with extensive inline annotation and bibliography",
+  "main": "./dist/reset.min.css",
+  "scripts": {
+    "build": "uglifycss src/reset.css > dist/reset.min.css && cp src/reset.css dist/reset.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julianjohannesen/modern-css-reset-annotated.git"
+  },
+  "keywords": [
+    "css reset",
+    "modern css reset"
+  ],
+  "author": "Julian Johannesen <julian.johannesen@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/julianjohannesen/modern-css-reset-annotated/issues"
+  },
+  "homepage": "https://github.com/julianjohannesen/modern-css-reset-annotated.git#readme",
+  "devDependencies": {
+    "uglifycss": "^0.0.29"
+  }
+}
