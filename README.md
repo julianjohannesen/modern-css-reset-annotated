@@ -1,6 +1,6 @@
 # A modern CSS reset annotated
 
-This project is a fork of Andy Bell's Modern CSS Reset. Modern CSS Reset is a tiny little reset that you can use as the basis of your CSS projects. You can read [Andy's breakdown on his site here](https://hankchizljaw.com/wrote/a-modern-css-reset/).
+This project is a fork of Andy Bell's Modern CSS Reset. Modern CSS Reset is a tiny little reset that you can use as the basis of your CSS projects. You can read [Andy's breakdown on his site](https://hankchizljaw.com/wrote/a-modern-css-reset/).
 
 ## Why fork the original project?
 
@@ -9,6 +9,14 @@ This project is a fork of Andy Bell's Modern CSS Reset. Modern CSS Reset is a ti
 2. To provide a quick reference that more experienced users can refer to to refresh themselves as to why a certain property has a certain value
 
 3. To provide dated citations that are both authoratative and **recent**. I often wonder whether a best practice is still a best practice. Knowing the source of the practice and the date it was created is very helpful in that regard.
+
+## Is a reset really necessary? 
+
+Maybe not. Chris Coyer of CSS Tricks [recently (Jan. 2022) wrote](https://css-tricks.com/notes-on-josh-comeaus-custom-css-reset/) that, if you're targeting mostly recent browswers,
+
+    We’re in something of a new era of CSS resets where… you kind of don’t need one? There isn’t that many major differences between browsers on default styling, and by the time you’re off and running styling stuff, you’ve probably steamrolled things into place. And so perhaps “modern” CSS resets are more of a collection of opinionated default styles that do useful things that you want on all your new projects because, well, that’s how you roll.
+
+That being said, there are still a few things that it might help to reset at the start, in addtion to the opinionated default styles Chris mentions.
 
 ## Installation
 

@@ -1,0 +1,108 @@
+/* Annotated on Feb 18th 2022, modern-css-reset version 1.4.0
+
+Sources:
+A Modern CSS Reset - https://piccalil.li/blog/a-modern-css-reset/  - Update Nov. 2020
+*/
+
+/* Box sizing rules - Change box sizing from content box to border box
+   Sources:
+   Box Sizing - Updated May 2015
+   https://css-tricks.com/box-sizing/
+   Inheriting Box Sizing Probably Slightly Better Best Pratice - Updated Sept. 2014
+   https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ 
+*/
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Remove default margin - User agent style sheets impose margins on many
+   elements. Reset those values to 0. 
+   Sources: 
+   User Agent Style Sheets: Basics and Samples - Updated May 2021
+   https://meiert.com/en/blog/user-agent-style-sheets/
+
+
+*/
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests 
+   default styling will be removed */
+/* NOTE: This information is at least a year old. Removing all list-styles
+   can cause accessibility issues as with Apple's VoiceOver, explained here: 
+   https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html#a-fix-for-the-fix */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+/* NOTE: Setting html {scroll-behavior: smooth} results in smooth scrolling
+   even through search results (Still true up to Chrome 98). html:focus-
+   within is a hack to overcome  this behavior. This hack requires setting
+   tabindex: -1 on elements that are not focusable in order to maintain 
+   smooth scrolling.
+   https://css-tricks.com/fixing-smooth-scrolling-with-find-on-page/ 
+   */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+/* NOTE: Added height auto. Don't forget to set explicit width and height
+   html img tags */
+img,
+picture {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
