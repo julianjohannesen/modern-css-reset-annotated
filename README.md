@@ -4,11 +4,13 @@ This project is a fork of Andy Bell's Modern CSS Reset. Modern CSS Reset is a ti
 
 ## Why fork the original project?
 
-1. To provide additional information on CSS resets for those unfamiliar with them and to do that inline via comments in the source file
+1. To provide additional information on CSS resets for those unfamiliar with them and to provide a quick reference that more experienced users can refer to to refresh themselves as to why a certain property has a certain value
 
-2. To provide a quick reference that more experienced users can refer to to refresh themselves as to why a certain property has a certain value
+2. To offer a problem/solution format for quick and easy review of each reset item
 
-3. To provide dated citations that are both authoratative and **recent**. I often wonder whether a best practice is still a best practice. Knowing the source of the practice and the date it was created is very helpful in that regard.
+3. To accomplish the above items via comments in the source file, rather than a second document
+
+4. To provide citations that are both authoratative and **dated**. I often wonder whether a best practice is still a best practice. Knowing the source of the practice and the date it was created is very helpful in that regard.
 
 ## Is a reset really necessary? 
 

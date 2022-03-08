@@ -1,86 +1,242 @@
 /* Annotated on Feb 18th 2022, modern-css-reset version 1.4.0
 
 Sources:
-A Modern CSS Reset - https://piccalil.li/blog/a-modern-css-reset/  - Update Nov. 2020
+A Modern CSS Reset - https://piccalil.li/blog/a-modern-css-reset/  - Updated Nov. 2020
+
+Other resets worth looking into: 
+
+
 */
 
-/* Box sizing rules - Change box sizing from content box to border box
-   Sources:
-   Box Sizing - Updated May 2015
-   https://css-tricks.com/box-sizing/
-   Inheriting Box Sizing Probably Slightly Better Best Pratice - Updated Sept. 2014
-   https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ 
-*/
+/*********************/
+/* SET BORDER BOX    */
+/*********************/
+
+/*
+The problem: The default box sizing method "content-box" calculates
+dimensions for layout based on an element's content, but does not include 
+padding or borders in that calculation. This is inconvenient in many 
+cases.
+
+The solution: Set box sizing to border-box, which will calculate dimensions
+based on the sum of content plus padding plus border.
+
+Comment: Andy mentions that it's been suggested that setting box-sizing on
+the html element and then inheriting box-sizing on all other elements is 
+the now preferred method of doing this. Here is that solution:  
+
 html {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*, 
+*:before, 
+*:after {
   box-sizing: inherit;
 }
 
-/* Remove default margin - User agent style sheets impose margins on many
-   elements. Reset those values to 0. 
-   Sources: 
-   User Agent Style Sheets: Basics and Samples - Updated May 2021
-   https://meiert.com/en/blog/user-agent-style-sheets/
-
-
+Sources:
+Box Sizing - Updated May 2015
+https://css-tricks.com/box-sizing/
+Inheriting Box Sizing Probably Slightly Better Best Pratice - Updated Sept. 2014
+https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ 
 */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/*********************/
+/* RESET MARGINS     */
+/*********************/
+
+/*
+The problem: Browser manufacturers use user agent style sheets to apply 
+default styles, most notably margin and padding, to HTML elements leading
+to cross-browser inconsistentencies and undesirable appearance. 
+
+The solution: Reset at least some margin values to 0. 
+
+Comment: Given how few elements are reset here, it might be just as easy
+to explicity set their margins as you go. Other resets like Eric Meyer's
+reset margins and padding on practically every element.
+
+Sources: 
+User Agent Style Sheets: Basics and Samples - Updated May 2021
+https://meiert.com/en/blog/user-agent-style-sheets/  
+*/
+
 body,
 h1,
 h2,
 h3,
 h4,
 p,
+li,
 figure,
+figcaption,
 blockquote,
 dl,
 dd {
   margin: 0;
 }
 
-/* Remove list styles on ul, ol elements with a list role, which suggests 
-   default styling will be removed */
-/* NOTE: This information is at least a year old. Removing all list-styles
-   can cause accessibility issues as with Apple's VoiceOver, explained here: 
-   https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html#a-fix-for-the-fix */
+/*********************/
+/* RESET LIST STYLES */ 
+/*********************/
+
+/*
+The problem: Apple's VoiceOver screen reader will not read a list that has
+list-style set to "none" as a list. This can lead to problems in, for example, 
+context menus that have list-style:none, but are, nonetheless, actual lists 
+that should be read as such. 
+
+The solution: First, set Aria role "list" on lists in your HTML. This
+ensures that screen readers will read these lists as lists. Next, target 
+only these lists in your css and set list-style to "none" by 
+default. 
+
+Sources:
+"Fixing" Lists - Updated Nov. 2019
+https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html#a-fix-for-the-fix 
+*/
+
 ul[role="list"],
 ol[role="list"] {
   list-style: none;
 }
 
-/* Set core root defaults */
-/* NOTE: Setting html {scroll-behavior: smooth} results in smooth scrolling
-   even through search results (Still true up to Chrome 98). html:focus-
-   within is a hack to overcome  this behavior. This hack requires setting
-   tabindex: -1 on elements that are not focusable in order to maintain 
-   smooth scrolling.
-   https://css-tricks.com/fixing-smooth-scrolling-with-find-on-page/ 
-   */
+/*********************/
+/* SMOOTH SCROLL HACK  */
+/*********************/
+
+/*
+The problem: Setting the html element's scroll-behavior to "smooth" results
+in smooth scrolling. Unfortunately, that includes smooth scrolling through
+search results when using "find on page", which can be very annoying.
+
+The solution: Instead of setting scroll-behavior on the html element, set
+it on the "html:focus-within" pseudo element. Not that wit this hack 
+smooth scrolling will only work on elements that can receive focus. To
+smooth scroll to a heading, for example, you will need to set tabindex 
+to "-1".
+
+Source:
+Fixing Smooth Scrolling with Find-on-Page - Jan. 2021
+https://css-tricks.com/fixing-smooth-scrolling-with-find-on-page/ 
+*/
+
 html:focus-within {
   scroll-behavior: smooth;
 }
 
-/* Set core body defaults */
+/*********************/
+/* SET BODY DEFAULTS  */
+/*********************/
+
+/*
+The body height problem: In some cases, your site's body may not
+fill the viewport, resulting in, for example, a footer appearing only half-
+way down the page, rather than at the bottom. 
+
+The solution: Set min-height to "100vh", thereby stretching the body to 
+fill the viewport, while also allowing the body to grow to fit any amount
+of content.
+
+Source:
+HTML vs Body: How to Set Width and Height for Full Page Size - Feb. 2021
+https://www.freecodecamp.org/news/html-page-width-height/
+
+The text-rendering problem: On older mobile devices, large blocks of text
+rendered with text-rendering set to "optimizeLegibility" can take a very
+long time to render and cause glitches.
+
+The solution: By default, set text-rendering to "optimizeSpeed".
+
+Source: 
+text-rendering - Updated Mar. 2014
+https://css-tricks.com/almanac/properties/t/text-rendering/
+text-rendering: optimizeLegibility - Marco Arment - Nov. 2012
+https://marco.org/2012/11/15/text-rendering-optimize-legibility
+
+The line-height problem: By default, some browsers set line-height to less
+than 1.5em, which can cause accessibility issues for people with low
+vision, dyslexia, or other conditions.
+
+The solution: Reset line-height to 1.5em 
+
+Source:
+line-height - Updated Feb. 2022
+https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+*/
+
 body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
 }
 
-/* A elements that don't have a class get default styles */
+/*********************/
+/* PREVENT LINK UNDERLINES FROM OBSCURING TEXT  */
+/*********************/
+
+/*
+The problem: In older browsers, when a link's text has glyphs with ascenders
+or decenders, if the link has an underline, it can pass through them, making
+the link difficult to read. 
+
+The solution: On at least links without a class, set text-decoration-skip-ink
+to auto. This is the default behavior in most browsers, though you won't see
+it in a user agent stylesheet.
+
+Source: 
+text-decoration-skip-ink - Updated Aug. 2021
+https://css-tricks.com/almanac/properties/t/text-decoration-skip-ink/
+*/
+
 a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
-/* Make images easier to work with */
-/* NOTE: Added height auto. Don't forget to set explicit width and height
-   html img tags */
-img,
-picture {
+/*********************/
+/* IMAGE GAP HACK AND OVERFLOW  */
+/*********************/
+
+/*
+The problem: Images are rendered inline, just like letters on a line. That
+means that space is given for glyph decenders below the image, even though
+decenders will never appear in that space. This creates added white space
+below an image that is neither padding nor margin space.
+
+The solution: The easiest way to address this problem is to set display to
+block (or flex, grid, inline-flex, inline-grid).
+
+Source: 
+Image inside div has extra space below the image - Updated Apr. 2011
+https://stackoverflow.com/questions/5804256/image-inside-div-has-extra-space-below-the-image
+
+The problem: When images are larger than their containers, they may over-
+flow the container.
+
+The solution: A solution is to set max-width to 100%, which will 
+prevent an image from overflowing it's container horizontally, while also
+causing it to properly scale as the viewport grows or shrinks.
+
+Comment: If you've remembered to set width and height in your HTML img tag,
+as you should to prevent layout shift, then max-width alone may not 
+prevent your image from becoming distored. One way to address this is to
+add "height: auto" to the img tag below.
+
+Source: 
+Setting Height and Width on Images Is Important Again - Updated Jan. 2022
+https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/
+ */
+
+ img {
   max-width: 100%;
-  height: auto;
   display: block;
 }
 
