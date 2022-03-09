@@ -1,9 +1,18 @@
 /* Annotated on Feb 18th 2022, modern-css-reset version 1.4.0
 
 Sources:
-A Modern CSS Reset - https://piccalil.li/blog/a-modern-css-reset/  - Updated Nov. 2020
+A Modern CSS Reset
+https://piccalil.li/blog/a-modern-css-reset/
+by Andy Bell - Updated Nov. 2020
 
 Other resets worth looking into: 
+The New CSS Reset
+https://elad2412.github.io/the-new-css-reset/
+by Elad Schecter - Updated Mar. 2022
+
+My Custom CSS Reset
+https://www.joshwcomeau.com/css/custom-css-reset/
+by Josh Comeau - Updated Nov. 2021
 
 
 */
@@ -36,10 +45,13 @@ html {
 }
 
 Sources:
-Box Sizing - Updated May 2015
+Box Sizing
 https://css-tricks.com/box-sizing/
-Inheriting Box Sizing Probably Slightly Better Best Pratice - Updated Sept. 2014
+by Marie Mosley - Updated May 2015
+
+Inheriting Box Sizing Probably Slightly Better Best Pratice
 https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ 
+by Chris Coyier - Updated Sept. 2014
 */
 
 *,
@@ -55,18 +67,31 @@ https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-pract
 
 /*
 The problem: Browser manufacturers use user agent style sheets to apply 
-default styles, most notably margin and padding, to HTML elements leading
-to cross-browser inconsistentencies and undesirable appearance. 
+default styles, including margin and padding, to HTML elements leading
+to cross-browser inconsistentencies in older browsers, difficulty 
+remembering and accounting for the rules that govern when margins 
+collapse, difficulty identifying the source of a particular margin on
+the page, and undesirable appearance. 
 
-The solution: Reset at least some margin values to 0. 
+The solution: Reset at least some margin values to 0. This will normalize
+margins across browsers, make the occurence of margin collapse more obvious,
+enable you to decide on a standard approach to adding margins (e.g. 
+paragraphs have only margin-bottom, headings have twice as much margin-
+top as margin-bottom, etc.), and make decisions about margins more
+intentional.
 
-Comment: Given how few elements are reset here, it might be just as easy
-to explicity set their margins as you go. Other resets like Eric Meyer's
-reset margins and padding on practically every element.
+Comment: Only a few elements are selected here. Eric Meyer's classic reset
+resets margins and padding on practically every element. Others use the
+universal selector to select every element like this: 
+
+* {
+  margin: 0;
+}
 
 Sources: 
-User Agent Style Sheets: Basics and Samples - Updated May 2021
+User Agent Style Sheets: Basics and Samples
 https://meiert.com/en/blog/user-agent-style-sheets/  
+by Jens Oliver - Updated May 2021
 */
 
 body,
@@ -97,11 +122,12 @@ that should be read as such.
 The solution: First, set Aria role "list" on lists in your HTML. This
 ensures that screen readers will read these lists as lists. Next, target 
 only these lists in your css and set list-style to "none" by 
-default. 
+default, allowing you to apply your own list styles when appropriate. 
 
 Sources:
-"Fixing" Lists - Updated Nov. 2019
+"Fixing" Lists
 https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html#a-fix-for-the-fix 
+by Scott O'Hara - Updated Nov. 2019
 */
 
 ul[role="list"],
@@ -119,14 +145,15 @@ in smooth scrolling. Unfortunately, that includes smooth scrolling through
 search results when using "find on page", which can be very annoying.
 
 The solution: Instead of setting scroll-behavior on the html element, set
-it on the "html:focus-within" pseudo element. Not that wit this hack 
+it on the "html:focus-within" pseudo element. Note that with this hack 
 smooth scrolling will only work on elements that can receive focus. To
 smooth scroll to a heading, for example, you will need to set tabindex 
-to "-1".
+on that heading to "-1".
 
 Source:
-Fixing Smooth Scrolling with Find-on-Page - Jan. 2021
+Fixing Smooth Scrolling with Find-on-Page
 https://css-tricks.com/fixing-smooth-scrolling-with-find-on-page/ 
+by Chris Coyier - Jan. 2021
 */
 
 html:focus-within {
@@ -146,9 +173,20 @@ The solution: Set min-height to "100vh", thereby stretching the body to
 fill the viewport, while also allowing the body to grow to fit any amount
 of content.
 
-Source:
-HTML vs Body: How to Set Width and Height for Full Page Size - Feb. 2021
+Comment: There are several other solutions, but only this one will set
+the html and body element's min height to the viewport height and allow
+both of those elements' height to increase as content is added to the page.
+Be aware that some browsers on mobile will size vh units as though the URL
+bar were always hidden, even though it isn't.
+
+Sources:
+HTML vs Body: How to Set Width and Height for Full Page Size
 https://www.freecodecamp.org/news/html-page-width-height/
+by Dave Gray - Updated Feb. 2021
+
+CSS *vh (dvh, lvh, svh) and *vw units
+https://dev.to/frehner/css-vh-dvh-lvh-svh-and-vw-units-27k4
+by Anthony Frehner - Updated Nov. 2021
 
 The text-rendering problem: On older mobile devices, large blocks of text
 rendered with text-rendering set to "optimizeLegibility" can take a very
@@ -157,10 +195,13 @@ long time to render and cause glitches.
 The solution: By default, set text-rendering to "optimizeSpeed".
 
 Source: 
-text-rendering - Updated Mar. 2014
+text-rendering
 https://css-tricks.com/almanac/properties/t/text-rendering/
-text-rendering: optimizeLegibility - Marco Arment - Nov. 2012
+by Chris Coyier - Updated Mar. 2014
+
+text-rendering: optimizeLegibility
 https://marco.org/2012/11/15/text-rendering-optimize-legibility
+by Marco Arment - Nov. 2012
 
 The line-height problem: By default, some browsers set line-height to less
 than 1.5em, which can cause accessibility issues for people with low
@@ -169,8 +210,9 @@ vision, dyslexia, or other conditions.
 The solution: Reset line-height to 1.5em 
 
 Source:
-line-height - Updated Feb. 2022
+line-height
 https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+by the Mozilla team - Updated Feb. 2022
 */
 
 body {
@@ -184,17 +226,18 @@ body {
 /*********************/
 
 /*
-The problem: In older browsers, when a link's text has glyphs with ascenders
-or decenders, if the link has an underline, it can pass through them, making
+The problem: In older browsers, when a link's text has decenders, if the
+link has an underline, the underline can pass through the decenders, making
 the link difficult to read. 
 
-The solution: On at least links without a class, set text-decoration-skip-ink
-to auto. This is the default behavior in most browsers, though you won't see
-it in a user agent stylesheet.
+The solution: On at least links without a class, set text-decoration-
+skip-ink to auto. This is the default behavior in most modern browsers, 
+though you won't see it in a user agent stylesheet.
 
 Source: 
-text-decoration-skip-ink - Updated Aug. 2021
+text-decoration-skip-ink
 https://css-tricks.com/almanac/properties/t/text-decoration-skip-ink/
+by Andy Adams - Updated Aug. 2021
 */
 
 a:not([class]) {
@@ -215,13 +258,14 @@ The solution: The easiest way to address this problem is to set display to
 block (or flex, grid, inline-flex, inline-grid).
 
 Source: 
-Image inside div has extra space below the image - Updated Apr. 2011
+Image inside div has extra space below the image
 https://stackoverflow.com/questions/5804256/image-inside-div-has-extra-space-below-the-image
+by Quentin - Apr. 2011
 
 The problem: When images are larger than their containers, they may over-
 flow the container.
 
-The solution: A solution is to set max-width to 100%, which will 
+The solution: One solution is to set max-width to 100%, which will 
 prevent an image from overflowing it's container horizontally, while also
 causing it to properly scale as the viewport grows or shrinks.
 
@@ -231,8 +275,9 @@ prevent your image from becoming distored. One way to address this is to
 add "height: auto" to the img tag below.
 
 Source: 
-Setting Height and Width on Images Is Important Again - Updated Jan. 2022
+Setting Height and Width on Images Is Important Again
 https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-again/
+by Barry Pollard - Updated Jan. 2022
  */
 
  img {
@@ -240,7 +285,42 @@ https://www.smashingmagazine.com/2020/03/setting-height-width-images-important-a
   display: block;
 }
 
-/* Inherit fonts for inputs and buttons */
+/*********************/
+/* INHERIT FONTS FOR INPUTS AND BUTTONS */
+/*********************/
+
+/*
+The problem: By default, some from widgets do not inherit font-family and 
+font-size from their parents. Many browsers use the system default appearance 
+instead.
+
+The solution: Set form controls to inherit the font shorthand property.
+
+Comment: MDN recommends using a different approach.  To make your forms' 
+appearance consistent with the rest of your content, add the following
+to your stylesheet:
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+Gotchya: By default, when font properites are explicitly set with the
+font shorthand property on a parent element, the properties are inherited 
+by child elements, but any properties that were omitted from the shorthand 
+are reset to their initial values. This is unexpected and can be annoying 
+when styling form controls.
+
+Sources: 
+Styling Web Forms
+https://developer.mozilla.org/en-US/docs/Learn/Forms/Styling_web_forms
+by Mozilla team - Updated Feb. 2022
+
+font
+https://css-tricks.com/almanac/properties/f/font/
+by Sarah Cope - Updated May 2015
+*/
+
 input,
 button,
 textarea,
@@ -248,7 +328,25 @@ select {
   font: inherit;
 }
 
-/* Remove all animations and transitions for people that prefer not to see them */
+/*********************/
+/* REMOVE ALL ANIMATIONS AND TRANSITIONS FOR PEOPLE WHO PREFER NOT TO SEE THEM */
+/*********************/
+
+/*
+The problem: Many people, especially those with vestibular disorders, prefer
+not to see animations and transitions.
+
+The solution: Use the prefers-reduced-motion media query to reset scroll
+behavior to auto and to effectively remove animations and transitions 
+from all elements and the ::before and ::after pseudo-elements for people
+who have chosen to set prefers-reduced-motion to reduce.
+
+Sources: 
+An Introduction to the Reduced Motion Media Query
+https://css-tricks.com/introduction-reduced-motion-media-query/
+by Eric Bailey - Updated Apr. 2019
+*/
+
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
    scroll-behavior: auto;
