@@ -10,9 +10,17 @@ The New CSS Reset
 https://elad2412.github.io/the-new-css-reset/
 by Elad Schecter - Updated Mar. 2022
 
+An Interview With Elad Shechter on “The New CSS Reset”
+https://css-tricks.com/an-interview-with-elad-shechter-on-the-new-css-reset/
+By Chris Coyier and Elad Shechter - Updated Feb. 2022
+
 My Custom CSS Reset
 https://www.joshwcomeau.com/css/custom-css-reset/
 by Josh Comeau - Updated Nov. 2021
+
+Notes on Josh Comeau's Custom CSS Reset
+https://css-tricks.com/notes-on-josh-comeaus-custom-css-reset/
+by Chris Coyier - Updated Jan 2022
 
 
 */
@@ -119,10 +127,11 @@ list-style set to "none" as a list. This can lead to problems in, for example,
 context menus that have list-style:none, but are, nonetheless, actual lists 
 that should be read as such. 
 
-The solution: First, set Aria role "list" on lists in your HTML. This
-ensures that screen readers will read these lists as lists. Next, target 
-only these lists in your css and set list-style to "none" by 
-default, allowing you to apply your own list styles when appropriate. 
+The solution: First, when using a list element that really is a list, but
+that should not be styled as a list in your HTML, remember to set Aria role
+"list". This will ensure that screen readers will read these lists as lists.
+Next, target only these lists in your css and set list-style to "none". 
+Other list elements will retain their default styles.
 
 Sources:
 "Fixing" Lists
@@ -290,7 +299,7 @@ by Barry Pollard - Updated Jan. 2022
 /*********************/
 
 /*
-The problem: By default, some from widgets do not inherit font-family and 
+The problem: By default, some form widgets do not inherit font-family and 
 font-size from their parents. Many browsers use the system default appearance 
 instead.
 
