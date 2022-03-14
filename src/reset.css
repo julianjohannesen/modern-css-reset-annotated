@@ -1,4 +1,4 @@
-/* Annotated on Feb 18th 2022, modern-css-reset version 1.4.0
+/* Annotated on Feb 18th 2022, modern-css-reset version 1.4.0 - published on Jan. 18th 2021
 
 Sources:
 A Modern CSS Reset
@@ -21,7 +21,6 @@ by Josh Comeau - Updated Nov. 2021
 Notes on Josh Comeau's Custom CSS Reset
 https://css-tricks.com/notes-on-josh-comeaus-custom-css-reset/
 by Chris Coyier - Updated Jan 2022
-
 
 */
 
@@ -185,8 +184,8 @@ of content.
 Comment: There are several other solutions, but only this one will set
 the html and body element's min height to the viewport height and allow
 both of those elements' height to increase as content is added to the page.
-Be aware that some browsers on mobile will size vh units as though the URL
-bar were always hidden, even though it isn't.
+Be aware that some browsers on mobile devices will size vh units as though
+the address bar were always hidden, even though it isn't.
 
 Sources:
 HTML vs Body: How to Set Width and Height for Full Page Size
@@ -263,8 +262,9 @@ means that space is given for glyph decenders below the image, even though
 decenders will never appear in that space. This creates added white space
 below an image that is neither padding nor margin space.
 
-The solution: The easiest way to address this problem is to set display to
-block (or flex, grid, inline-flex, inline-grid).
+The solution: The easiest way to address this problem is to set inage 
+elemetns' display property to block (or flex, grid, inline-flex, inline-
+grid).
 
 Source: 
 Image inside div has extra space below the image
@@ -281,7 +281,7 @@ causing it to properly scale as the viewport grows or shrinks.
 Comment: If you've remembered to set width and height in your HTML img tag,
 as you should to prevent layout shift, then max-width alone may not 
 prevent your image from becoming distored. One way to address this is to
-add "height: auto" to the img tag below.
+add "height: auto" to the img tag.
 
 Source: 
 Setting Height and Width on Images Is Important Again
